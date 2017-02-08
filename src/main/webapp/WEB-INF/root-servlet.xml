@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <context:component-scan base-package="xinwei.web"/>
+    <mvc:resources location="/resource/" mapping="/resource/**"/>
+    <mvc:annotation-driven/>
+    <!-- 配置拦截器 -->
+    <mvc:interceptors>
+        <!-- 多个拦截器，按顺序执行 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/> <!-- 拦截所有的url包括子url路径 -->
+            <bean class="xinwei.web.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+        <!-- 其他拦截器 -->
+    </mvc:interceptors>
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+        <property name="viewClass"
+                  value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+          p:defaultEncoding="UTF-8"
+          p:uploadTempDir="resource/fileUpload/temp"
+    />
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location">
+            <value>key.properties</value>
+        </property>
+    </bean>
+    <bean id="AWSCredentials" class="com.amazonaws.auth.BasicAWSCredentials">
+        <constructor-arg index="0" value="${aws.accesskey}"></constructor-arg>
+        <constructor-arg index="1" value="${aws.secretkey}"></constructor-arg>
+    </bean>
+    <bean id="awsRegion" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetClass" value="com.amazonaws.regions.RegionUtils"/>
+        <property name="targetMethod" value="getRegion"/>
+        <property name="arguments">
+            <list>
+                <value>us-west-2</value>
+            </list>
+        </property>
+    </bean>
+
+
+    <bean id="dynamoDBClient" class="com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient">
+        <constructor-arg index="0" ref="AWSCredentials"/>
+        <property name="region" ref="awsRegion"/>
+    </bean>
+
+    <bean id="dynamoDBMapper" class="com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper">
+        <constructor-arg index="0" ref="dynamoDBClient"/>
+    </bean>
+
+    <bean id="amazonS3" class="com.amazonaws.services.s3.AmazonS3Client">
+        <constructor-arg index="0" ref="AWSCredentials"/>
+    </bean>
+    <bean id="accesskey" class="java.lang.String">
+        <constructor-arg index="0" value="${accesscode}"/>
+    </bean>
+
+</beans>

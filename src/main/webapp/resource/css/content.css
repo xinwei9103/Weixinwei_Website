@@ -1,0 +1,28 @@
+footer {
+    background-color: #f4511e;
+    color: #ffffff;
+    padding: 15px;
+}
+
+.thumbnail {
+    padding: 0 0 0 0;
+    border: none;
+    border-radius: 5%;
+}
+
+.thumbnail img {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.pager a {
+    background-color: #f4511e !important;
+    color: #fff !important;
+    border: none !important;
+}
+
+.pager a:hover {
+    background-color: #fff !important;
+    color: #f4511e !important;
+    border: none !important;
+}

@@ -1,0 +1,38 @@
+.jumbotron {
+    background-color: #f4511e; /* Orange */
+    color: #ffffff;
+    padding: 100px 25px;
+}
+
+/* Add a dark gray background color to the modal header and center text */
+.modal-header, h4, .close {
+    background-color: #fff !important;
+    color: #f4511e !important;
+    text-align: center;
+    font-size: 30px;
+}
+
+.modal-header, .modal-body {
+    padding: 40px 50px;
+}
+
+.carousel-inner img {
+    -webkit-filter: grayscale(60%);
+    filter: grayscale(60%); /* make all photos black and white */
+    width: 100%; /* Set width to 100% */
+    margin: auto;
+}
+
+.carousel-caption h3 {
+    color: #f4511e !important;
+}
+
+.carousel-caption p {
+    color: #f4511e !important;
+}
+
+@media (max-width: 600px) {
+    .carousel-caption {
+        display: none; /* Hide the carousel text when the screen is less than 600 pixels wide */
+    }
+}

@@ -1,0 +1,46 @@
+.navbar {
+    margin-bottom: 0;
+    background-color: #f4511e;
+    z-index: 9999;
+    border: 0;
+    font-size: 12px !important;
+    line-height: 1.42857143 !important;
+    letter-spacing: 4px;
+    border-radius: 0;
+}
+
+.navbar li a, .navbar .navbar-brand {
+    color: #fff !important;
+    cursor: hand;
+}
+
+.navbar-nav li a:hover, .navbar-nav li.active a {
+    color: #f4511e !important;
+    background-color: #fff !important;
+}
+
+.navbar-default .navbar-toggle {
+    border-color: transparent;
+    color: #fff !important;
+}
+
+/* Black buttons with extra padding and without rounded borders */
+.btn {
+
+    color: #f1f1f1 !important;
+    border: 1px #f4511e !important;
+    background-color: #f4511e !important;
+}
+
+/* On hover, the color of .btn will transition to white with black text */
+.btn:hover, .btn:focus {
+    color: #f4511e !important;
+    border: 1px #f4511e !important;
+    background-color: #fff !important;
+}
+
+.logo {
+    font-family: 'Indie Flower', cursive !important;
+}
+
+
